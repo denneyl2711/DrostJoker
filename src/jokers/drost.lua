@@ -1,6 +1,7 @@
 SMODS.Joker{
+    --todo rename everything to droste :)
     key='drost',
-    atlas = 'placeholders',
+    atlas = 'droste',
     pos = {
         x = 0,
         y = 0
@@ -56,6 +57,33 @@ SMODS.Joker{
             --upgrade the stuff
             new_card.ability.extra.denominator = card.ability.extra.denominator + 1
             new_card.ability.extra.x_mult = card.ability.extra.x_mult + 1
+
+            --calculate new sprite sheet location so he wears a different hat
+            positions = {
+                {0,0},
+                {0,1},
+                {0,2},
+                {1,0},
+                {1,1},
+                {1,2},
+                {2,0},
+                {2,1},
+            }
+
+            --very likely a better way to do this but whatever
+            for index, value in ipairs(positions) do
+                if self.pos.x == value[1] and self.pos.y == value[2] then
+                    new_index = (index + 1) % #positions
+                    if new_index == 0 then
+                        new_index = 1 --thanks Lua
+                    end
+
+                    new_pos = positions[new_index]
+                    self.pos.x = new_pos[1]
+                    self.pos.y = new_pos[2]
+                    break
+                end
+            end
 
             new_card:add_to_deck()
             G.jokers:emplace(new_card)

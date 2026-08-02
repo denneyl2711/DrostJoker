@@ -1,6 +1,6 @@
 SMODS.Atlas {
-    key = 'placeholders',
-    path= 'placeholders.png',
+    key = 'droste',
+    path= 'jokerDrosteAll.png',
     px = 71,
     py = 95
 }
