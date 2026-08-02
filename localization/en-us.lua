@@ -1,8 +1,8 @@
 return {
     descriptions = {
         Joker = {
-            j_drost_drost = {
-                name = 'Drost Joker',
+            j_droste_droste = {
+                name = 'Droste Joker',
                 text = {
                     'When sold, {C:green}#3# in #4# chance{}',
                     'to spawn a copy of this Joker with',

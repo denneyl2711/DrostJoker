@@ -1,9 +1,9 @@
 {
-  "id": "DrostJoker",
-  "name": "Drost Joker",
+  "id": "DrosteJoker",
+  "name": "Droste Joker",
   "author": ["denneyl"],
   "description": "TODO add the description :)",
-  "prefix": "drost",
+  "prefix": "droste",
   "main_file": "main.lua",
   "version": "0.0.1"
 }

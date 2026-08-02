@@ -1,6 +1,5 @@
 SMODS.Joker{
-    --todo rename everything to droste :)
-    key='drost',
+    key='droste',
     atlas = 'droste',
     pos = {
         x = 0,
@@ -38,7 +37,7 @@ SMODS.Joker{
                     {
                         set = "Joker",
                         area = G.jokers,
-                        key = "j_drost_drost",
+                        key = "j_droste_droste",
                     }
             )
 
