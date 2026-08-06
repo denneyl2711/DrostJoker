@@ -1,3 +1,5 @@
+local mod = SMODS.current_mod
+
 SMODS.Joker{
     key='droste',
     atlas = 'droste',
@@ -11,17 +13,36 @@ SMODS.Joker{
             odds = 1,
         }
     },
-    rarity = 3,
+    rarity = 2,
     cost = 8,
     loc_vars = function(self, info_queue, card)
+
+        --multiply both by four to get rid of the decimal fraction
+        --simplify the fraction
+        --to simplify:
+        -- find gcf
+        -- divide both top and bottom by GCF
+
+        local numerator = G.GAME.probabilities.normal
+        local denominator = card.ability.extra.odds
+
+        if mod.config.simplify_decimal_fractions then
+            numerator = numerator * 4
+            denominator = denominator * 4
+
+            local divisor = gcf(numerator, denominator)
+            numerator = numerator / divisor
+            denominator = denominator / divisor
+        end
+
         return {
             vars = {
-                card.ability.extra.odds,
-                card.ability.extra.x_mult, --current x_mult
+                numerator,
+                denominator,
                 card.ability.extra.x_mult + 1, --x_mult of next Joker
+                card.ability.extra.x_mult, --current x_mult
             }
         }
-
     end,
     calculate = function(self, card, context)
         if context.joker_main then
@@ -98,3 +119,27 @@ SMODS.Joker{
         end
     end
 }
+
+function gcf(first, second)
+    first_factors = factors(first)
+    second_factors = factors(second)
+
+    for i = #first_factors, 1, -1 do
+        for j = #second_factors, 1, -1 do
+            if first_factors[i] == second_factors[j] then
+                return first_factors[i]
+            end
+        end
+    end
+end
+
+function factors(number)
+    local the_factors = {}
+    for i = 1, number / 2 do
+        if number % i == 0 then
+            table.insert(the_factors, i)
+        end
+    end
+    table.insert(the_factors, number)
+    return the_factors
+end
