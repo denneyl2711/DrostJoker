@@ -90,17 +90,17 @@ SMODS.Joker{
                     { 2, 1 },
                 }
 
+                local sprite_pos = card.children.center.sprite_pos
                 --very likely a better way to do this but whatever
                 for index, value in ipairs(positions) do
-                    if self.pos.x == value[1] and self.pos.y == value[2] then
+                    if sprite_pos.x == value[1] and sprite_pos.y == value[2] then
                         new_index = (index + 1) % #positions
                         if new_index == 0 then
                             new_index = 1 --thanks Lua
                         end
 
                         new_pos = positions[new_index]
-                        self.pos.x = new_pos[1]
-                        self.pos.y = new_pos[2]
+                        new_card.children.center:set_sprite_pos({x = new_pos[1], y = new_pos[2]})
                         break
                     end
                 end
